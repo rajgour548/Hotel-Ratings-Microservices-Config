@@ -7,8 +7,6 @@ spring:
     password: Rajgour@1000
     url: jdbc:mysql://localhost:3306/hotel_servicedb
     driver-class-name: com.mysql.cj.jdbc.Driver
-  application:
-    name: HOTELSERVICE
 
   jpa:
     hibernate:
