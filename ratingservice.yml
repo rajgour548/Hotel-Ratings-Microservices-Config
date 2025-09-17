@@ -4,6 +4,8 @@ spring:
       uri: mongodb+srv://gourraj548:Rajgour1000@journalapp.yrpmctd.mongodb.net/?retryWrites=true&w=majority&appName=journalApp
       database: hotelratingsdb
       auto-index-creation: true
+  application:
+    name: RATINGSERVICE
 
 server:
   port: 8082
