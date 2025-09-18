@@ -29,10 +29,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: health
-  endpoint:
-    health:
-      show-details: always
+        include: health,info,metrics  # expose health & resilience4j metrics
+  health:
+    circuitbreakers:
+      enabled: true   # enable circuit breaker health indicator
+
 
 resilience4j:
   circuitbreaker:
