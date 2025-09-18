@@ -11,6 +11,11 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
             - Path=/users/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: userServiceCB
+                fallbackUri: forward:/userFallback  
         - id: HOTELSERVICE
           uri: lb://HOTELSERVICE
           predicates:
