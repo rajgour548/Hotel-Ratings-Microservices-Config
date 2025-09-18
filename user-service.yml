@@ -24,16 +24,15 @@ eureka:
 
 management:
   health:
-    circuitbreaker:
+    circuitbreakers:
       enabled: true
   endpoints:
     web:
       exposure:
-        include: health,info,metrics  # expose health & resilience4j metrics
-  health:
-    circuitbreakers:
-      enabled: true   # enable circuit breaker health indicator
-
+        include: health 
+  endpoint:
+    health:
+      show-details: always
 
 resilience4j:
   circuitbreaker:
