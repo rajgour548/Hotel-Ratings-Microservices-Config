@@ -47,10 +47,8 @@ eureka:
 
 resilience4j:
   circuitbreaker:
-    instances:
-      userServiceCB:
-      hotelServiceCB:
-      ratingServiceCB:
+    configs:
+      default:
         registerHealthIndicator: true
         eventConsumerBufferSize: 10
         failureRateThreshold: 50
@@ -59,4 +57,12 @@ resilience4j:
         waitDurationInOpenState: 6s
         permittedNumberOfCallsInHalfOpenState: 3
         slidingWindowSize: 10
-        slidingWindowType: COUNT_BASED          
+        slidingWindowType: COUNT_BASED
+    instances:
+      userServiceCB:
+        baseConfig: default
+      hotelServiceCB:
+        baseConfig: default
+      ratingServiceCB:
+        baseConfig: default
+        
