@@ -57,8 +57,8 @@ resilience4j:
   ratelimiter:
     instances:
       ratingHotelRateLimiter:
-        limitForPeriod: 1         # Allow 5 requests
+        limitForPeriod: 10         # Allow 5 requests
         limitRefreshPeriod: 1s   # Every 10 seconds
-        timeoutDuration: 1s       
+        timeoutDuration: 2s       
       
 
