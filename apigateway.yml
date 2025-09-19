@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: APIGATEWAY
+  redis:
+    host: localhost
+    port: 6379
   cloud:
     gateway:
       routes:
@@ -23,10 +26,13 @@ spring:
                   firstBackoff: 1s
                   maxBackoff: 1s
                   factor: 1
-            - name: RateLimiter
+            - name: RequestRateLimiter
               args:
-                rate-limiter-name: userServiceRL
-                fallbackUri: forward:/userFallback
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+                redis-rate-limiter.requestedTokens: 1
+                redis-rate-limiter.enabled: true
+                redis-rate-limiter.statusCode: 429
 
         - id: HOTELSERVICE
           uri: lb://HOTELSERVICE
@@ -44,10 +50,13 @@ spring:
                   firstBackoff: 1s
                   maxBackoff: 1s
                   factor: 1
-            - name: RateLimiter
+            - name: RequestRateLimiter
               args:
-                rate-limiter-name: hotelServiceRL
-                fallbackUri: forward:/hotelFallback
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+                redis-rate-limiter.requestedTokens: 1
+                redis-rate-limiter.enabled: true
+                redis-rate-limiter.statusCode: 429
 
         - id: RATINGSERVICE
           uri: lb://RATINGSERVICE
@@ -65,10 +74,13 @@ spring:
                   firstBackoff: 1s
                   maxBackoff: 1s
                   factor: 1
-            - name: RateLimiter
+            - name: RequestRateLimiter
               args:
-                rate-limiter-name: ratingServiceRL
-                fallbackUri: forward:/ratingFallback
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+                redis-rate-limiter.requestedTokens: 1
+                redis-rate-limiter.enabled: true
+                redis-rate-limiter.statusCode: 429
 
 eureka:
   instance:
@@ -100,18 +112,3 @@ resilience4j:
         baseConfig: default
       ratingServiceCB:
         baseConfig: default
-
-  ratelimiter:
-    instances:
-      userServiceRL:
-        limit-for-period: 5        # max 5 requests per period
-        limit-refresh-period: 1s   # period duration
-        timeout-duration: 0        # fail fast if exceeded
-      hotelServiceRL:
-        limit-for-period: 5
-        limit-refresh-period: 1s
-        timeout-duration: 0
-      ratingServiceRL:
-        limit-for-period: 5
-        limit-refresh-period: 1s
-        timeout-duration: 0
