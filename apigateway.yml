@@ -1,4 +1,3 @@
-add redisratelimiter also provide dependency needed: add reselience ratelimiter to this keep everything else same : add ratelimiter in this also add the same fallback for each service : 
 server:
   port: 8083
 
