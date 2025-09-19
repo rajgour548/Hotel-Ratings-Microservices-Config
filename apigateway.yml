@@ -23,10 +23,10 @@ spring:
                   firstBackoff: 1s
                   maxBackoff: 1s
                   factor: 1
-            - name: RequestRateLimiter
+            - name: RateLimiter
               args:
-                redis-rate-limiter.replenishRate: 1   # 5 requests per second
-                redis-rate-limiter.burstCapacity: 10  # max 10 requests at once
+                rate-limiter-name: userServiceRL
+                fallbackUri: forward:/userFallback
 
         - id: HOTELSERVICE
           uri: lb://HOTELSERVICE
@@ -44,10 +44,10 @@ spring:
                   firstBackoff: 1s
                   maxBackoff: 1s
                   factor: 1
-            - name: RequestRateLimiter
+            - name: RateLimiter
               args:
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 10
+                rate-limiter-name: hotelServiceRL
+                fallbackUri: forward:/hotelFallback
 
         - id: RATINGSERVICE
           uri: lb://RATINGSERVICE
@@ -65,10 +65,10 @@ spring:
                   firstBackoff: 1s
                   maxBackoff: 1s
                   factor: 1
-            - name: RequestRateLimiter
+            - name: RateLimiter
               args:
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 10
+                rate-limiter-name: ratingServiceRL
+                fallbackUri: forward:/ratingFallback
 
 eureka:
   instance:
@@ -100,3 +100,18 @@ resilience4j:
         baseConfig: default
       ratingServiceCB:
         baseConfig: default
+
+  ratelimiter:
+    instances:
+      userServiceRL:
+        limit-for-period: 5        # max 5 requests per period
+        limit-refresh-period: 1s   # period duration
+        timeout-duration: 0        # fail fast if exceeded
+      hotelServiceRL:
+        limit-for-period: 5
+        limit-refresh-period: 1s
+        timeout-duration: 0
+      ratingServiceRL:
+        limit-for-period: 5
+        limit-refresh-period: 1s
+        timeout-duration: 0
