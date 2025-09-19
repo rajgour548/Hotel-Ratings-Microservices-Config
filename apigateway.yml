@@ -20,8 +20,8 @@ spring:
               args:
                 retries: 3
                 backoff:
-                  firstBackoff: 5s
-                  maxBackoff: 5s
+                  firstBackoff: 1s
+                  maxBackoff: 1s
                   factor: 1
 
         - id: HOTELSERVICE
@@ -37,8 +37,8 @@ spring:
               args:
                 retries: 3
                 backoff:
-                  firstBackoff: 5s
-                  maxBackoff: 5s
+                  firstBackoff: 1s
+                  maxBackoff: 1s
                   factor: 1
 
         - id: RATINGSERVICE
@@ -54,8 +54,8 @@ spring:
               args:
                 retries: 3
                 backoff:
-                  firstBackoff: 5s
-                  maxBackoff: 5s
+                  firstBackoff: 1s
+                  maxBackoff: 1s
                   factor: 1
 
 eureka:
