@@ -15,7 +15,15 @@ spring:
             - name: CircuitBreaker
               args:
                 name: userServiceCB
-                fallbackUri: forward:/userFallback  
+                fallbackUri: forward:/userFallback
+            - name: Retry
+              args:
+                retries: 3
+                backoff:
+                  firstBackoff: 5s
+                  maxBackoff: 5s
+                  factor: 1
+
         - id: HOTELSERVICE
           uri: lb://HOTELSERVICE
           predicates:
@@ -24,7 +32,15 @@ spring:
             - name: CircuitBreaker
               args:
                 name: hotelServiceCB
-                fallbackUri: forward:/hotelFallback    
+                fallbackUri: forward:/hotelFallback
+            - name: Retry
+              args:
+                retries: 3
+                backoff:
+                  firstBackoff: 5s
+                  maxBackoff: 5s
+                  factor: 1
+
         - id: RATINGSERVICE
           uri: lb://RATINGSERVICE
           predicates:
@@ -33,7 +49,14 @@ spring:
             - name: CircuitBreaker
               args:
                 name: ratingServiceCB
-                fallbackUri: forward:/ratingFallback    
+                fallbackUri: forward:/ratingFallback
+            - name: Retry
+              args:
+                retries: 3
+                backoff:
+                  firstBackoff: 5s
+                  maxBackoff: 5s
+                  factor: 1
 
 eureka:
   instance:
@@ -65,4 +88,3 @@ resilience4j:
         baseConfig: default
       ratingServiceCB:
         baseConfig: default
-        
