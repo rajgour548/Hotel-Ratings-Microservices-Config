@@ -25,7 +25,7 @@ spring:
                   factor: 1
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 5   # 5 requests per second
+                redis-rate-limiter.replenishRate: 1   # 5 requests per second
                 redis-rate-limiter.burstCapacity: 10  # max 10 requests at once
 
         - id: HOTELSERVICE
@@ -46,7 +46,7 @@ spring:
                   factor: 1
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 10
 
         - id: RATINGSERVICE
@@ -67,7 +67,7 @@ spring:
                   factor: 1
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 10
 
 eureka:
