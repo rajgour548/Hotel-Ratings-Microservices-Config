@@ -1,12 +1,10 @@
+add redisratelimiter also provide dependency needed: add reselience ratelimiter to this keep everything else same : add ratelimiter in this also add the same fallback for each service : 
 server:
   port: 8083
 
 spring:
   application:
     name: APIGATEWAY
-  redis:
-    host: localhost
-    port: 6379
   cloud:
     gateway:
       routes:
@@ -26,13 +24,6 @@ spring:
                   firstBackoff: 1s
                   maxBackoff: 1s
                   factor: 1
-            - name: RequestRateLimiter
-              args:
-                redis-rate-limiter.replenishRate: 5
-                redis-rate-limiter.burstCapacity: 10
-                redis-rate-limiter.requestedTokens: 1
-                redis-rate-limiter.enabled: true
-                redis-rate-limiter.statusCode: 429
 
         - id: HOTELSERVICE
           uri: lb://HOTELSERVICE
@@ -50,13 +41,6 @@ spring:
                   firstBackoff: 1s
                   maxBackoff: 1s
                   factor: 1
-            - name: RequestRateLimiter
-              args:
-                redis-rate-limiter.replenishRate: 5
-                redis-rate-limiter.burstCapacity: 10
-                redis-rate-limiter.requestedTokens: 1
-                redis-rate-limiter.enabled: true
-                redis-rate-limiter.statusCode: 429
 
         - id: RATINGSERVICE
           uri: lb://RATINGSERVICE
@@ -74,13 +58,6 @@ spring:
                   firstBackoff: 1s
                   maxBackoff: 1s
                   factor: 1
-            - name: RequestRateLimiter
-              args:
-                redis-rate-limiter.replenishRate: 5
-                redis-rate-limiter.burstCapacity: 10
-                redis-rate-limiter.requestedTokens: 1
-                redis-rate-limiter.enabled: true
-                redis-rate-limiter.statusCode: 429
 
 eureka:
   instance:
