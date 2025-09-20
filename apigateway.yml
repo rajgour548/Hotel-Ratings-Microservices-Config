@@ -14,8 +14,8 @@ spring:
       default-filters:
         - name: RequestRateLimiter
           args:
-            redis-rate-limiter.replenishRate: 2    # tokens per second
-            redis-rate-limiter.burstCapacity: 1    # max tokens
+            redis-rate-limiter.replenishRate: 20    # tokens per second
+            redis-rate-limiter.burstCapacity: 20    # max tokens
             redis-rate-limiter.requestedTokens: 1
             key-resolver: "#{@ipKeyResolver}"       # added key resolver
 
