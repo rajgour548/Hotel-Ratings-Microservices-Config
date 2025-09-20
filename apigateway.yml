@@ -5,8 +5,9 @@ spring:
   application:
     name: APIGATEWAY
   redis:
-    url: "redis://:dBo6F6eELkzNaIH3F6OUHKhNSwDGkNub@redis-17389.c301.ap-south-1-1.ec2.redns.redis-cloud.com:17389"
-    timeout: 5s
+    host: redis-17389.c301.ap-south-1-1.ec2.redns.redis-cloud.com
+    port: 17389
+    password: dBo6F6eELkzNaIH3F6OUHKhNSwDGkNub
   
 
   cloud:
