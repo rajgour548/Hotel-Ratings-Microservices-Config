@@ -4,8 +4,26 @@ server:
 spring:
   application:
     name: APIGATEWAY
+  redis:
+    host: redis-11455.c89.us-east-1-3.ec2.redns.redis-cloud.com
+    port: 11455
+    password: FY2Nqg90K5CQuiXUcmqcMeFXIUTY1PHm
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 5
+        min-idle: 1
+        max-wait: 1000ms
+
   cloud:
     gateway:
+      default-filters:
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter.replenishRate: 5     # tokens per second
+            redis-rate-limiter.burstCapacity: 10    # max tokens
+            redis-rate-limiter.requestedTokens: 1
+
       routes:
         - id: USER-SERVICE
           uri: lb://USER-SERVICE
