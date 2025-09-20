@@ -8,7 +8,7 @@ spring:
     host: redis-17389.c301.ap-south-1-1.ec2.redns.redis-cloud.com
     port: 17389
     password: dBo6F6eELkzNaIH3F6OUHKhNSwDGkNub
-    ssl: true
+  
 
   cloud:
     gateway:
